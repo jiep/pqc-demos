@@ -2,6 +2,12 @@
 
 ## Demo 1 (`1-demo-liboqs`)
 
+This demo implements the following key-exchange protocol with [`liboqs`](https://github.com/open-quantum-safe/liboqs).
+
+![Key exchange protocol](./docs/images/key-exchange-protocol.PNG)
+
+### How to build
+
 1. Compile `liboqs`.
 
 ```bashshell
