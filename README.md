@@ -2,6 +2,17 @@
 
 ## Demo 1
 
+1. Compile `liboqs`.
+
+```bashshell
+cd liboqs && mkdir -p build && cd build
+cmake -GNinja ..
+ninja
+cd ../..
+```
+
+2. Compile `demo-liboqs.c`.
+
 ```bashshell
 gcc -Iliboqs/build/include -Lliboqs/build/lib demo-liboqs.c -o demo-liboqs -loqs -lcrypto
 ```
