@@ -180,7 +180,8 @@ python3 hybrid-signature.py
 [SIGN] Signing message "An important message to sign" with ML-DSA-87...
 [SIGN] sigPQC (4627 bytes): 4ddc7dde7d44545446d715f69fa669a1...0000000000000000020c12171c23292f
 [SIGN] Signing message "An important message to sign" with Ed448...
-[SIGN] sigPQC (114 bytes): f9be244ffb3a7360693f02d2fc28cade...ab73515355f9ceb47796b519b26b0c00
+[SIGN] sigT (114 bytes): f9be244ffb3a7360693f02d2fc28cade...ab73515355f9ceb47796b519b26b0c00
+[SIGN] Hybrid signature is sigPQC || sigT
 
 [VERIFY] Verifying signatures...
 [VERIFY] The hybrid signature is valid
