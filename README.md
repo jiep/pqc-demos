@@ -74,7 +74,98 @@ gcc -I../liboqs/build/include -L../liboqs/build/lib demo-liboqs.c -o demo-liboqs
 
 ## Demo 2 (`2-demo-liboqs-python`)
 
-TODO
+This demo implements the following hybrid signature scheme with [`liboqs-python`](https://github.com/open-quantum-safe/liboqs).
+
+### How to build
+
+1. Compile `liboqs` (requires shared library).
+
+```bashshell
+cd liboqs && mkdir -p build-shared && cd build-shared
+cmake -GNinja .. -DBUILD_SHARED_LIBS=ON
+ninja
+sudo ninja install
+cd ../../2-demo-liboqs-python
+```
+
+2. Set the `LD_LIBRARY_PATH` environment variable to point to the path to `liboqs` library directory.
+
+```bashshell
+export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+```
+
+3. Install and activate virtualenv for Python
+
+```bashshell
+python3 -m venv venv
+. venv/bin/activate
+```
+
+4. Install `liboqs-python`.
+
+```bashshell
+cd ../liboqs-python
+pip install .
+```
+
+4. Check if `liboqs-python` works properly.
+
+```bashshell
+python3 examples/sig.py
+```
+
+<details>
+<summary>View output (click to expand)</summary>
+
+```
+liboqs version: 0.12.0
+liboqs-python version: 0.12.0
+Enabled signature mechanisms:
+['Dilithium2', 'Dilithium3', 'Dilithium5', 'ML-DSA-44', 'ML-DSA-65',
+ 'ML-DSA-87', 'Falcon-512', 'Falcon-1024', 'Falcon-padded-512',
+ 'Falcon-padded-1024', 'SPHINCS+-SHA2-128f-simple', 'SPHINCS+-SHA2-128s-simple',
+ 'SPHINCS+-SHA2-192f-simple', 'SPHINCS+-SHA2-192s-simple',
+ 'SPHINCS+-SHA2-256f-simple', 'SPHINCS+-SHA2-256s-simple',
+ 'SPHINCS+-SHAKE-128f-simple', 'SPHINCS+-SHAKE-128s-simple',
+ 'SPHINCS+-SHAKE-192f-simple', 'SPHINCS+-SHAKE-192s-simple',
+ 'SPHINCS+-SHAKE-256f-simple', 'SPHINCS+-SHAKE-256s-simple', 'MAYO-1', 'MAYO-2',
+ 'MAYO-3', 'MAYO-5', 'cross-rsdp-128-balanced', 'cross-rsdp-128-fast',
+ 'cross-rsdp-128-small', 'cross-rsdp-192-balanced', 'cross-rsdp-192-fast',
+ 'cross-rsdp-192-small', 'cross-rsdp-256-balanced', 'cross-rsdp-256-fast',
+ 'cross-rsdp-256-small', 'cross-rsdpg-128-balanced', 'cross-rsdpg-128-fast',
+ 'cross-rsdpg-128-small', 'cross-rsdpg-192-balanced', 'cross-rsdpg-192-fast',
+ 'cross-rsdpg-192-small', 'cross-rsdpg-256-balanced', 'cross-rsdpg-256-fast',
+ 'cross-rsdpg-256-small']
+
+Signature details:
+{'claimed_nist_level': 2,
+ 'is_euf_cma': True,
+ 'length_public_key': 1312,
+ 'length_secret_key': 2560,
+ 'length_signature': 2420,
+ 'name': 'ML-DSA-44',
+ 'sig_with_ctx_support': True,
+ 'version': 'FIPS204'}
+
+Valid signature? True
+```
+
+5. Install `pypa/cryptography`.
+
+```bashshell
+pip install cryptography==44.0.0
+```
+
+6. Run Python script with hybrid signature scheme.
+
+```bashshell
+cd ../2-demo-liboqs-python
+python3 hybrid-signature.py
+```
+
+</details>
+
+
 
 ## Demo 3 (`3-demo-oqs-curl`)
 

@@ -2,3 +2,8 @@
 	path = liboqs
 	url = https://github.com/open-quantum-safe/liboqs
 	branch = 0.12.0
+
+[submodule "liboqs-python"]
+	path = liboqs-python
+	url = https://github.com/open-quantum-safe/liboqs-python
+	branch = 0.12.0
