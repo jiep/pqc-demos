@@ -6,7 +6,7 @@
 
 ```bashshell
 cd liboqs && mkdir -p build && cd build
-cmake -GNinja ..
+cmake -GNinja .. -DOQS_USE_SHA3_OPENSSL=ON
 ninja
 cd ../..
 ```
@@ -14,7 +14,7 @@ cd ../..
 2. Compile `demo-liboqs.c`.
 
 ```bashshell
-gcc -Iliboqs/build/include -Lliboqs/build/lib demo-liboqs.c -o demo-liboqs -loqs -lcrypto
+gcc -Iliboqs/build/include -Lliboqs/build/lib demo-liboqs.c -o demo-liboqs -loqs -lcrypto -pthread
 ```
 
 ## Demo 2

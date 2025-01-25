@@ -10,8 +10,40 @@ Algorithms names:
 #include <stdio.h>
 #include <string.h>
 #include <oqs/oqs.h>
+#include <openssl/evp.h>
 
 #define MAX 16
+
+void sha3_256(uint8_t *output, const uint8_t *input, size_t input_len) {
+    EVP_MD_CTX *mdctx = NULL;
+
+    if ((mdctx = EVP_MD_CTX_new()) == NULL) {
+        fprintf(stderr, "Error creating hash context\n");
+        return;
+    }
+
+    if (EVP_DigestInit_ex(mdctx, EVP_sha3_256(), NULL) != 1) {
+        fprintf(stderr, "Error initializing SHA3-256 context\n");
+        EVP_MD_CTX_free(mdctx);
+        return;
+    }
+
+    if (EVP_DigestUpdate(mdctx, input, input_len) != 1) {
+        fprintf(stderr, "Error updating hash\n");
+        EVP_MD_CTX_free(mdctx);
+        return;
+    }
+
+    unsigned int output_len;
+    if (EVP_DigestFinal_ex(mdctx, output, &output_len) != 1) {
+        fprintf(stderr, "Error finalizing hash\n");
+        EVP_MD_CTX_free(mdctx);
+        return;
+    }
+
+    EVP_MD_CTX_free(mdctx);
+}
+
 
 void print_hex(const uint8_t *bytes, size_t length) {
   for(size_t i = 0; i < length; i++){
@@ -40,8 +72,8 @@ void concat_keys(const uint8_t *key1, const uint8_t *key2, const uint8_t *key3,
 
 int main(void) {
 
-  OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_kyber_1024);
-  printf("[--] Setting kyber1024...\n");
+  OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_1024);
+  printf("[--] Selected KEM: ML-KEM-1024\n");
 
   // Static keys for P1
   uint8_t *pk1 = malloc(kem->length_public_key);
@@ -49,9 +81,9 @@ int main(void) {
   OQS_KEM_keypair(kem, pk1, sk1);
 
   printf("\n[P1] Generating static keys...\n");
-  printf("[P1] pk1: ");
+  printf("[P1] pk1 (%ld bytes): ", kem->length_public_key);
   print_hex_short(pk1, kem->length_public_key);
-  printf("[P1] sk1: ");
+  printf("[P1] sk1 (%ld bytes): ", kem->length_secret_key);
   print_hex_short(sk1, kem->length_secret_key);
 
   // Static keys for P2
@@ -60,9 +92,9 @@ int main(void) {
   OQS_KEM_keypair(kem, pk2, sk2);
 
   printf("\n[P2] Generating static keys...\n");
-  printf("[P2] pk2: ");
+  printf("[P2] pk2 (%ld bytes): ", kem->length_public_key);
   print_hex_short(pk2, kem->length_public_key);
-  printf("[P2] sk2: ");
+  printf("[P2] sk2 (%ld bytes): ", kem->length_secret_key);
   print_hex_short(sk2, kem->length_secret_key);
 
   // -----------------------------------------------
@@ -71,20 +103,20 @@ int main(void) {
   uint8_t *sk = malloc(kem->length_secret_key);
   OQS_KEM_keypair(kem, pk, sk);
 
-  printf("\n[P1] Generating pk and sk...\n");
-  printf("[P1] pk: ");
+  printf("\n[P1] Generating ephemeral pk and sk...\n");
+  printf("[P1] pk (%ld bytes): ", kem->length_public_key);
   print_hex_short(pk, kem->length_public_key);
-  printf("[P1] sk: ");
+  printf("[P1] sk (%ld bytes): ", kem->length_secret_key);
   print_hex_short(sk, kem->length_secret_key);
 
   uint8_t *c2 = malloc(kem->length_ciphertext);
   uint8_t *k2 = malloc(kem->length_shared_secret);
   OQS_KEM_encaps(kem, c2, k2, pk2);
 
-  printf("[P1] Generating c2 and k2...\n");
-  printf("[P1] c2: ");
+  printf("[P1] Generating encapsulation...\n");
+  printf("[P1] c2 (%ld bytes): ", kem->length_ciphertext);
   print_hex_short(c2, kem->length_ciphertext);
-  printf("[P1] k2: ");
+  printf("[P1] k2 (%ld bytes): ", kem->length_shared_secret);
   print_hex(k2, kem->length_shared_secret);
   printf("[P1] Sending pk and c2 to P2...\n");
 
@@ -94,27 +126,27 @@ int main(void) {
   uint8_t *k = malloc(kem->length_shared_secret);
   OQS_KEM_encaps(kem, c, k, pk);
 
-  printf("\n[P2] Generating c and k...\n");
-  printf("[P2] c: ");
+  printf("\n[P2] Generating encapsulation...\n");
+  printf("[P2] c (%ld bytes): ", kem->length_ciphertext);
   print_hex_short(c, kem->length_ciphertext);
-  printf("[P2] k: ");
+  printf("[P2] k (%ld bytes): ", kem->length_shared_secret);
   print_hex(k, kem->length_shared_secret);
 
   uint8_t *c1 = malloc(kem->length_ciphertext);
   uint8_t *k1 = malloc(kem->length_shared_secret);
   OQS_KEM_encaps(kem, c1, k1, pk1);
 
-  printf("[P2] Generating c1 and k1...\n");
-  printf("[P2] c1: ");
+  printf("[P2] Generating encapsulation...\n");
+  printf("[P2] c1 (%ld bytes): ", kem->length_ciphertext);
   print_hex_short(c1, kem->length_ciphertext);
-  printf("[P2] k1: ");
+  printf("[P2] k1 (%ld bytes): ", kem->length_shared_secret);
   print_hex(k1, kem->length_shared_secret);
 
   uint8_t *k2_prime = malloc(kem->length_shared_secret);
   OQS_KEM_decaps(kem, k2_prime, c2, sk2);
 
-  printf("[P2] Generating k2_prime...\n");
-  printf("[P2] k2_prime: ");
+  printf("[P2] Generating decapsulation...\n");
+  printf("[P2] k2_prime (%ld bytes): ", kem->length_shared_secret);
   print_hex(k2_prime, kem->length_shared_secret);
   printf("[P2] Sending c and c1 to P1...\n");
 
@@ -123,33 +155,33 @@ int main(void) {
   uint8_t *k_prime = malloc(kem->length_shared_secret);
   OQS_KEM_decaps(kem, k_prime, c, sk);
 
-  printf("\n[P1] Generating k_prime...\n");
-  printf("[P1] k_prime: ");
+  printf("\n[P1] Generating decapsulation...\n");
+  printf("[P1] k_prime (%ld bytes): ", kem->length_shared_secret);
   print_hex(k_prime, kem->length_shared_secret);
 
   uint8_t *k1_prime = malloc(kem->length_shared_secret);
   OQS_KEM_decaps(kem, k1_prime, c1, sk1);
 
-  printf("[P1] Generating k1_prime...\n");
-  printf("[P1] k1_prime: ");
+  printf("[P1] Generating decapsulation...\n");
+  printf("[P1] k1_prime (%ld bytes): ", kem->length_shared_secret);
   print_hex(k1_prime, kem->length_shared_secret);
 
   // P1 generates a secret key from k_prime, k1_prime, and k2
   uint8_t *concat_keys1 = malloc(3*kem->length_shared_secret);
   uint8_t *key1 = malloc(kem->length_shared_secret);
   concat_keys(k_prime, k1_prime, k2, kem->length_shared_secret, concat_keys1);
-  OQS_SHA3_sha3_256(key1, concat_keys1, 3*kem->length_shared_secret);
+  sha3_256(key1, concat_keys1, 3*kem->length_shared_secret);
 
   // P2 generates a secret key from k, k1, and k2_prime
   uint8_t *concat_keys2 = malloc(3*kem->length_shared_secret);
   uint8_t *key2 = malloc(kem->length_shared_secret);
   concat_keys(k, k1, k2_prime, kem->length_shared_secret, concat_keys2);
-  OQS_SHA3_sha3_256(key2, concat_keys2, 3*kem->length_shared_secret);
+  sha3_256(key2, concat_keys2, 3*kem->length_shared_secret);
 
-  printf("\n[P1] key1: ");
+  printf("\n[P1] shared key: ");
   print_hex(key1, kem->length_shared_secret);
 
-  printf("[P2] key2: ");
+  printf("[P2] shared key: ");
   print_hex(key2, kem->length_shared_secret);
 
   if(memcmp(key1, key2, kem->length_shared_secret) != 0){
