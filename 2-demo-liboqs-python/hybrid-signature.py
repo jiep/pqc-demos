@@ -40,7 +40,8 @@ with oqs.Signature(PQC_SIGNATURE_SCHEME) as signer:
         # Sign message with Ed448
         print(f"[SIGN] Signing message \"{message.decode()}\" with Ed448...")
         signatureT = skT.sign(message)
-        print(f"[SIGN] sigPQC ({len(signatureT)} bytes): {signatureT.hex()[:32]}...{signatureT.hex()[-32:]}")
+        print(f"[SIGN] sigT ({len(signatureT)} bytes): {signatureT.hex()[:32]}...{signatureT.hex()[-32:]}")
+        print("[SIGN] Hybrid signature is sigPQC || sigT")
 
         # Verify signatures. The hybrid signature is valid
         # if and only if both signatures are valid.
