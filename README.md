@@ -343,7 +343,7 @@ CPUINFO: OPENSSL_ia32cap=0xc2da2203478bffff:0x842509
 </details>
 
 ```bash
-# Signature
+# All algorithms
 docker run -it openquantumsafe/curl openssl speed -seconds 2
 ```
 
