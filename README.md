@@ -290,13 +290,55 @@ SecP256r1MLKEM768
 </details>
 
 ```bash
-docker run -it openquantumsafe/curl openssl speed
+# KEM
+docker run -it openquantumsafe/curl openssl speed -seconds 2 mlkem512 X25519
 ```
 
 <details>
 <summary>View output (click to expand)</summary>
 
 ```bash
+Doing X25519 keygen ops for 2s: 85292 X25519 KEM keygen ops in 3.63s
+Doing X25519 encaps ops for 2s: 14214 X25519 KEM encaps ops in 2.00s
+Doing X25519 decaps ops for 2s: 27242 X25519 KEM decaps ops in 2.00s
+Doing mlkem512 keygen ops for 2s: 38469 mlkem512 KEM keygen ops in 1.99s
+Doing mlkem512 encaps ops for 2s: 29718 mlkem512 KEM encaps ops in 1.95s
+Doing mlkem512 decaps ops for 2s: 26682 mlkem512 KEM decaps ops in 2.00s
+version: 3.4.0
+built on: Fri Jan 24 06:12:02 2025 UTC
+options: bn(64,64)
+compiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DNDEBUG
+CPUINFO: OPENSSL_ia32cap=0xc2da2203478bffff:0x842509
+                               keygen    encaps    decaps keygens/s  encaps/s  decaps/s
+                     X25519 0.000043s 0.000141s 0.000073s   23496.4    7107.0   13621.0
+                   mlkem512 0.000052s 0.000066s 0.000075s   19331.2   15240.0   13341.0
+```
+</details>
+
+```bash
+# Signature
+docker run -it openquantumsafe/curl openssl speed -seconds 2 mldsa44 ed25519
+```
+
+<details>
+<summary>View output (click to expand)</summary>
+
+```bash
+Doing 253 bits sign Ed25519 ops for 2s: 38442 253 bits Ed25519 sign ops in 2.00s 
+Doing 253 bits verify Ed25519 ops for 2s: 14925 253 bits Ed25519 verify ops in 2.10s
+Doing mldsa44 keygen ops for 2s: 11860 mldsa44 signature keygen ops in 1.87s
+Doing mldsa44 signs ops for 2s: 2584 mldsa44 signature sign ops in 1.94s
+Doing mldsa44 verify ops for 2s: 11537 mldsa44 signature verify ops in 2.00s
+version: 3.4.0
+built on: Fri Jan 24 06:12:02 2025 UTC
+options: bn(64,64)
+compiler: gcc -fPIC -pthread -m64 -Wa,--noexecstack -Wall -O3 -DOPENSSL_USE_NODELETE -DL_ENDIAN -DOPENSSL_PIC -DOPENSSL_BUILDING_OPENSSL -DNDEBUG
+CPUINFO: OPENSSL_ia32cap=0xc2da2203478bffff:0x842509
+                              sign    verify    sign/s verify/s
+ 253 bits EdDSA (Ed25519)   0.0001s   0.0001s  19221.0   7107.1
+                               keygen     signs    verify keygens/s    sign/s  verify/s
+                    mldsa44 0.000158s 0.000751s 0.000173s    6342.2    1332.0    5768.5
+
 ```
 </details>
 
