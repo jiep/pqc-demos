@@ -10,7 +10,7 @@ This demo implements the following key-exchange protocol with [`liboqs`](https:/
 
 1. Compile `liboqs`.
 
-```bashshell
+```bash
 cd liboqs && mkdir -p build && cd build
 cmake -GNinja ..
 ninja
@@ -19,13 +19,13 @@ cd ../../1-demo-liboqs
 
 2. Compile `demo-liboqs.c`.
 
-```bashshell
+```bash
 gcc -I../liboqs/build/include -L../liboqs/build/lib demo-liboqs.c -o demo-liboqs -loqs -lcrypto -pthread
 ```
 
 3. Run `demo-liboqs`.
 
-```bashshell
+```bash
 ./demo-liboqs
 ```
 <details>
@@ -80,7 +80,7 @@ This demo implements the following hybrid signature scheme with [`liboqs-python`
 
 1. Compile `liboqs` (requires shared library).
 
-```bashshell
+```bash
 cd liboqs && mkdir -p build-shared && cd build-shared
 cmake -GNinja .. -DBUILD_SHARED_LIBS=ON
 ninja
@@ -90,27 +90,27 @@ cd ../../2-demo-liboqs-python
 
 2. Set the `LD_LIBRARY_PATH` environment variable to point to the path to `liboqs` library directory.
 
-```bashshell
+```bash
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
 ```
 
 3. Install and activate virtualenv for Python
 
-```bashshell
+```bash
 python3 -m venv venv
 . venv/bin/activate
 ```
 
 4. Install `liboqs-python`.
 
-```bashshell
+```bash
 cd ../liboqs-python
 pip install .
 ```
 
 4. Check if `liboqs-python` works properly.
 
-```bashshell
+```bash
 python3 examples/sig.py
 ```
 
@@ -153,13 +153,13 @@ Valid signature? True
 
 5. Install `pypa/cryptography`.
 
-```bashshell
+```bash
 pip install cryptography==44.0.0
 ```
 
 6. Run Python script with hybrid signature scheme.
 
-```bashshell
+```bash
 cd ../2-demo-liboqs-python
 python3 hybrid-signature.py
 ```
@@ -167,7 +167,7 @@ python3 hybrid-signature.py
 <details>
 <summary>View output (click to expand)</summary>
 
-```bashshell
+```bash
 [KEYGEN] Generating keypairs...
 [KEYGEN] Generating keyapir for ML-DSA-87...
 [KEYGEN] pkPQC (2592 bytes): 583940f87c3271b7bb722dde0eb9d6e2...795c025b1ccbd7d61ad4f8d15f3f0ebb
@@ -199,17 +199,112 @@ python3 hybrid-signature.py
 
 ## Demo 3 (`3-demo-oqs-curl`)
 
-TODO
+This demo connects `curl` to [Open Quantum Safe test server](https://test.openquantumsafe.org).
 
-```bashshell
-docker run -v `pwd`:/ca -it openquantumsafe/curl curl --cacert /ca/CA.crt --curves kyber512 https://test.openquantumsafe.org:6014
+> [!NOTE]
+> This demo requires [Docker](https://www.docker.com/).
+
+```bash
+cd 3-demo-oqs-curl
 ```
+
+```bash
+# ML-KEM-768
+docker run -v `pwd`:/ca -it openquantumsafe/curl curl --cacert /ca/CA.crt --curves mlkem768 https://test.openquantumsafe.org:6020
+```
+
+<details>
+<summary>View output (click to expand)</summary>
+
+```bash
+<!DOCTYPE html>
+<html>
+<head>
+<title>Open Quantum Safe interop test server for quantum-safe cryptography</title>
+</head>
+<body>
+<h1 align=center>
+Successfully connected using
+ecdsap256-mlkem768!
+</h1>
+
+Client-side KEM algorithm(s) indicated:
+mlkem768
+</body>
+</html>
+```
+</details>
+
+```bash
+# X25519-ML-KEM-768
+docker run -v `pwd`:/ca -it openquantumsafe/curl curl --cacert /ca/CA.crt --curves X25519MLKEM768 https://test.openquantumsafe.org:6002
+```
+
+<details>
+<summary>View output (click to expand)</summary>
+
+```bash
+<!DOCTYPE html>
+<html>
+<head>
+<title>Open Quantum Safe interop test server for quantum-safe cryptography</title>
+</head>
+<body>
+<h1 align=center>
+Successfully connected using
+ecdsap256-X25519MLKEM768!
+</h1>
+
+Client-side KEM algorithm(s) indicated:
+X25519MLKEM768
+</body>
+</html>
+```
+</details>
+
+```bash
+# SecP256r1-MLKEM-768
+docker run -v `pwd`:/ca -it openquantumsafe/curl curl --cacert /ca/CA.crt --curves SecP256r1MLKEM768 https://test.openquantumsafe.org:6001
+```
+
+<details>
+<summary>View output (click to expand)</summary>
+
+```bash
+<!DOCTYPE html>
+<html>
+<head>
+<title>Open Quantum Safe interop test server for quantum-safe cryptography</title>
+</head>
+<body>
+<h1 align=center>
+Successfully connected using
+ecdsap256-SecP256r1MLKEM768!
+</h1>
+
+Client-side KEM algorithm(s) indicated:
+SecP256r1MLKEM768
+</body>
+</html>
+```
+</details>
+
+```bash
+docker run -it openquantumsafe/curl openssl speed
+```
+
+<details>
+<summary>View output (click to expand)</summary>
+
+```bash
+```
+</details>
 
 ## Demo 4 (`4-demo-tls13`)
 
 TODO
 
-```bashshell
+```bash
 chrome://flags
 #enable-tls13-kyber
 https://pq.cloudflareresearch.com
