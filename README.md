@@ -1012,5 +1012,6 @@ This demo shows how to visualize if post-quantum TLS is used by browser.
 
 ![https://test.openquantumsafe.org:6002/ screenshot](./docs/images/test-6002.png)
 
-
+# License
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
 
