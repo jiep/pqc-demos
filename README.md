@@ -216,7 +216,7 @@ docker run -v `pwd`:/ca -it openquantumsafe/curl curl --cacert /ca/CA.crt --curv
 <details>
 <summary>View output (click to expand)</summary>
 
-```bash
+```html
 <!DOCTYPE html>
 <html>
 <head>
@@ -243,7 +243,7 @@ docker run -v `pwd`:/ca -it openquantumsafe/curl curl --cacert /ca/CA.crt --curv
 <details>
 <summary>View output (click to expand)</summary>
 
-```bash
+```html
 <!DOCTYPE html>
 <html>
 <head>
