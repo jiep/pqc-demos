@@ -23,12 +23,10 @@ venv:
 
 liboqs_python:
 	. $(VENV_DIR)/bin/activate && \
-	cd $(LIBOQS_PYTHON_DIR) && \
-	pip install .
+	cd $(LIBOQS_PYTHON_DIR) && pip install .
 
 install_requirements:
-	. $(VENV_DIR)/bin/activate && \
-	pip install -r $(PYTHON_DIR)/requirements.txt
+	. $(VENV_DIR)/bin/activate && pip install -r $(PYTHON_DIR)/requirements.txt
 
 run: liboqs venv liboqs_python install_requirements
 	export LD_LIBRARY_PATH=$$LD_LIBRARY_PATH:/usr/local/lib && \
