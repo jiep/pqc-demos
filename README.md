@@ -978,7 +978,7 @@ export DISPLAY=:0
 docker run --rm -it --net=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-unix -v `pwd`:/root/captures openquantumsafe/wireshark
 ```
 
-3. Open file `handshake_tls13_kyber1024`.
+3. Open file `handshake_tls13_kyber1024.pcapng`.
 
 4. Filter by `tls.handshake`.
 
@@ -987,6 +987,10 @@ docker run --rm -it --net=host -e DISPLAY=$DISPLAY -v /tmp/.X11-unix:/tmp/.X11-u
 6. Search for `Extension: key_share`.
 
 ![Wireshark TLS 1.3 capture](./docs/images/capture-kyber1024.png)
+
+7. Repeat with `handshake_tls13_x25519mlkem768.pcapng`.
+
+![Wireshark hybrid TLS 1.3 capture](./docs/images/capture-x25519mlkem768.png)
 
 ## Demo 5 (`5-demo-tls13`)
 
