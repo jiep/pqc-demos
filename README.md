@@ -11,22 +11,19 @@ This demo implements the following key-exchange protocol with [`liboqs`](https:/
 1. Compile `liboqs`.
 
 ```bash
-cd liboqs && mkdir -p build && cd build
-cmake -GNinja ..
-ninja
-cd ../../1-demo-liboqs
+make liboqs
 ```
 
 2. Compile `demo-liboqs.c`.
 
 ```bash
-gcc -I../liboqs/build/include -L../liboqs/build/lib demo-liboqs.c -o demo-liboqs -loqs -lcrypto -pthread
+make demo
 ```
 
 3. Run `demo-liboqs`.
 
 ```bash
-./demo-liboqs
+make run
 ```
 <details>
 <summary>View example (click to expand)</summary>
