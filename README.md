@@ -78,37 +78,25 @@ This demo implements the following hybrid signature scheme with [`liboqs-python`
 1. Compile `liboqs` (requires shared library).
 
 ```bash
-cd liboqs && mkdir -p build-shared && cd build-shared
-cmake -GNinja .. -DBUILD_SHARED_LIBS=ON
-ninja
-sudo ninja install
-cd ../../2-demo-liboqs-python
+make liboqs
 ```
 
-2. Set the `LD_LIBRARY_PATH` environment variable to point to the path to `liboqs` library directory.
+2. Install and activate virtualenv for Python and set the `LD_LIBRARY_PATH` environment variable to point to the path to `liboqs` library directory.
 
 ```bash
-export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+make venv
 ```
 
-3. Install and activate virtualenv for Python
+3. Install `liboqs-python`.
 
 ```bash
-python3 -m venv venv
-. venv/bin/activate
-```
-
-4. Install `liboqs-python`.
-
-```bash
-cd ../liboqs-python
-pip install .
+make liboqs_python
 ```
 
 4. Check if `liboqs-python` works properly.
 
 ```bash
-python3 examples/sig.py
+make check
 ```
 
 <details>
@@ -148,17 +136,16 @@ Valid signature? True
 ```
 </details>
 
-5. Install `pypa/cryptography`.
+5. Install `requirements.txt`.
 
 ```bash
-pip install cryptography==44.0.0
+make install_requirements
 ```
 
 6. Run Python script with hybrid signature scheme.
 
 ```bash
-cd ../2-demo-liboqs-python
-python3 hybrid-signature.py
+make run_hybrid_signature
 ```
 
 <details>
