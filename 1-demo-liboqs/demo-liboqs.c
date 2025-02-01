@@ -1,6 +1,6 @@
 /* 
 Compile with
-gcc -Iliboqs/build/include -Lliboqs/build/lib demo-liboqs.c -o demo-liboqs -loqs -lcrypto
+gcc -I../liboqs/build/include -L../liboqs/build/lib demo-liboqs.c -o demo-liboqs -loqs -lcrypto -pthread
 
 Algorithms names: 
   - KEM: https://github.com/open-quantum-safe/liboqs/blob/main/src/kem/kem.h
