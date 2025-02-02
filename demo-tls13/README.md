@@ -12,12 +12,12 @@ This demo shows how to visualize if post-quantum TLS is used by browser.
 
 5. Look for `X25519MLKEM768`.
 
-![pq.cloudflareresearch.com screenshot](./docs/images/pq-cloudflare-research.png)
+![pq.cloudflareresearch.com screenshot](../docs/images/pq-cloudflare-research.png)
 
 6. Repeat with https://test.openquantumsafe.org:6056/
 
-![https://test.openquantumsafe.org:6056/ screenshot](./docs/images/test-6056.png)
+![https://test.openquantumsafe.org:6056/ screenshot](../docs/images/test-6056.png)
 
 7. Repeat with https://test.openquantumsafe.org:6002.
 
-![https://test.openquantumsafe.org:6002/ screenshot](./docs/images/test-6002.png)
+![https://test.openquantumsafe.org:6002/ screenshot](../docs/images/test-6002.png)
