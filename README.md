@@ -1,35 +1,50 @@
 # PQC Demos
 
-## Demo LibOQS
+## How to clone this repo
+
+```
+git clone --recurse-submodules https://github.com/jiep/pqc-demos.git
+```
+
+## Requirements
+
+* C compiler like `gcc`.
+* Python 3 and virtual environment.
+* Docker.
+* An updated browser like Google Chrome or Firefox.
+
+## Demos
+
+## LibOQS
 
 This demo implements the following key-exchange protocol with [`liboqs`](https://github.com/open-quantum-safe/liboqs).
 
 See [demo-liboqs-c](./demo-liboqs-c/) for more details.
 
-## Demo LibOQS-Python
+## LibOQS-Python
 
 This demo implements the following hybrid signature scheme with [`liboqs-python`](https://github.com/open-quantum-safe/liboqs).
 
 See [demo-liboqs-python](./demo-liboqs-python/) for more details.
 
-## Demo OQS-Curl
+### OQS-Curl
 
-This demo connects `curl` to [Open Quantum Safe test server](https://test.openquantumsafe.org).
+This demo connects `oqs-curl` to [Open Quantum Safe test server](https://test.openquantumsafe.org).
 
 See [demo-oqs-curl](./demo-oqs-curl/) for more details.
 
-## Demo OQS-Wireshark
+### OQS-Wireshark
 
 This demo shows how to use [OQS-Wireshark](https://github.com/open-quantum-safe/oqs-demos/blob/main/wireshark/README.md).
 
 See [demo-oqs-wireshark](./demo-oqs-wireshark/) for more details.
 
-## Demo TLS 1.3
+### Demo TLS 1.3
 
 This demo shows how to visualize if post-quantum TLS is used by browser.
 
 See [demo-tls13](./demo-tls13/) for more details.
 
-# License
+## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
