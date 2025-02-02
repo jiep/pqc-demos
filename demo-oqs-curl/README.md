@@ -6,10 +6,6 @@ This demo connects `curl` to [Open Quantum Safe test server](https://test.openqu
 > This demo requires [Docker](https://www.docker.com/).
 
 ```bash
-cd 3-demo-oqs-curl
-```
-
-```bash
 # ML-KEM-768
 docker run -v `pwd`:/ca -it openquantumsafe/curl curl --cacert /ca/CA.crt --curves mlkem768 https://test.openquantumsafe.org:6020
 ```
