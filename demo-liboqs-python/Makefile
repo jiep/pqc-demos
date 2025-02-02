@@ -3,7 +3,7 @@
 LIBOQS_DIR=../liboqs
 LIBOQS_BUILD=$(LIBOQS_DIR)/build-shared
 LIBOQS_SO=$(LIBOQS_BUILD)/lib/liboqs.so
-PYTHON_DIR=../2-demo-liboqs-python
+PYTHON_DIR=../demo-liboqs-python
 VENV_DIR=venv
 LIBOQS_PYTHON_DIR=../liboqs-python
 EXAMPLES_DIR=../liboqs-python/examples
