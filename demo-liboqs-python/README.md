@@ -1,8 +1,8 @@
-## Demo LibOQS-Python
+# Demo LibOQS-Python
 
 This demo implements the following hybrid signature scheme with [`liboqs-python`](https://github.com/open-quantum-safe/liboqs-python).
 
-### How to build
+## How to build
 
 1. Compile `liboqs` (requires shared library).
 

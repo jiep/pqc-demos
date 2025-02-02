@@ -24,5 +24,12 @@ This demo shows how to use [OQS-Wireshark](https://github.com/open-quantum-safe/
 
 See [demo-oqs-wireshark](./demo-oqs-wireshark/) for more details.
 
+## Demo TLS 1.3
+
+This demo shows how to visualize if post-quantum TLS is used by browser.
+
+See [demo-tls13](./demo-tls13/) for more details.
+
 # License
+
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.

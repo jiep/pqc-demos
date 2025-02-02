@@ -1,4 +1,4 @@
-## Demo OQS-Curl
+# Demo OQS-Curl
 
 This demo connects `curl` to [Open Quantum Safe test server](https://test.openquantumsafe.org).
 
