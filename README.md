@@ -39,13 +39,13 @@ This demo shows how to use [OQS-Wireshark](https://github.com/open-quantum-safe/
 
 See [demo-oqs-wireshark](./demo-oqs-wireshark/) for more details.
 
-### Demo TLS 1.3
+### TLS 1.3
 
 This demo shows how to visualize if post-quantum TLS is used by browser.
 
 See [demo-tls13](./demo-tls13/) for more details.
 
-### Demo Stateful Hash-Based Signatures with Botan
+### Stateful Hash-Based Signatures with Botan
 
 This demo shows how private key changes its state after each signature generation.
 
