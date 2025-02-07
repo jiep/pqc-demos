@@ -8,7 +8,7 @@ configure:
 	cd ${BOTAN} && ./configure.py
 
 build: configure
-	make
+	cd ${BOTAN} && make
 
 clean:
 	rm -rf ${BOTAN}

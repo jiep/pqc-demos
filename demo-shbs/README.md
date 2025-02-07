@@ -1,9 +1,15 @@
 # Demo Stateful Hash-Based Signatures with Botan
 
-1. Build Botan.
+1. Configure Botan.
 
 ```bash
-make
+make configure
+```
+
+2. Compile Botan.
+
+```bash
+
 ```
 
 2. Generate and save private key.
