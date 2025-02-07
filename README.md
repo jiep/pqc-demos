@@ -15,13 +15,13 @@ git clone --recurse-submodules https://github.com/jiep/pqc-demos.git
 
 ## Demos
 
-## LibOQS
+### LibOQS
 
 This demo implements the following key-exchange protocol with [`liboqs`](https://github.com/open-quantum-safe/liboqs).
 
 See [demo-liboqs-c](./demo-liboqs-c/) for more details.
 
-## LibOQS-Python
+### LibOQS-Python
 
 This demo implements the following hybrid signature scheme with [`liboqs-python`](https://github.com/open-quantum-safe/liboqs).
 
@@ -39,11 +39,17 @@ This demo shows how to use [OQS-Wireshark](https://github.com/open-quantum-safe/
 
 See [demo-oqs-wireshark](./demo-oqs-wireshark/) for more details.
 
-### Demo TLS 1.3
+### TLS 1.3
 
 This demo shows how to visualize if post-quantum TLS is used by browser.
 
 See [demo-tls13](./demo-tls13/) for more details.
+
+### Stateful Hash-Based Signatures with Botan
+
+This demo shows how private key changes its state after each signature generation.
+
+See [demo-shbs](./demo-shbs/) for more details.
 
 ## License
 
