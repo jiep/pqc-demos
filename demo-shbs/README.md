@@ -12,7 +12,13 @@ make configure
 make build
 ```
 
-3. Generate and save private key.
+3. Install Botan.
+
+```bash
+make install
+```
+
+4. Generate and save private key.
 
 ```bash
 botan keygen --algo=XMSS > priv
@@ -35,14 +41,13 @@ pElEPwI=
 
 </details>
 
-4. Create a copy of the private key.
+5. Create a copy of the private key.
 
 ```bash
 cp priv priv-orig
 ```
 
-5. Compute hash for private keys.
-
+6. Compute hash for private keys.
 ```bash
 sha512sum priv*
 ```
@@ -57,7 +62,7 @@ sha512sum priv*
 
 </details>
 
-6. Get and save public key from private key.
+7. Get and save public key from private key.
 
 ```bash
 botan pkcs8 --pub-out priv > pub
@@ -77,7 +82,7 @@ oV45QdYuvlDSPzE=
 
 </details>
 
-7. Generate signature for data `data`.
+8. Generate signature for data `data`.
 
 ```bash
 botan sign priv data > sig
@@ -92,7 +97,7 @@ AAAAAJZEpiLcpBBDnYskISyJe/02g4ZSdm9RP6j/9rp9BOwa34OHULtyu0cuEkDrnD2U8YcI8mNtgWh1
 
 </details>
 
-8. Compute hash again for private keys.
+9. Compute hash again for private keys.
 
 ```bash
 sha512sum priv*
@@ -107,7 +112,7 @@ sha512sum priv*
 ```
 </details>
 
-9. Find differences between private keys.
+10. Find differences between private keys.
 
 ```bash
 diff priv priv-orig
@@ -128,7 +133,7 @@ diff priv priv-orig
 </details>
 
 
-10. Verify signature.
+11. Verify signature.
 
 ```bash
 botan verify pub data sig
