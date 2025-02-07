@@ -1,23 +1,14 @@
-BOTAN=../botan
-PREFIX=../botan
-BUILD_DIR ?= build
-
-
-JOBS ?= $(shell nproc)
+BOTAN = ../botan
 
 all: build
 
-.PHONY: configure build install clean
-
+.PHONY: configure build
 
 configure:
-	cd ${BOTAN} && ./configure.py --prefix=${PREFIX}
+	cd ${BOTAN} && ./configure.py
 
 build: configure
-	$(MAKE) -C ${BUILD_DIR} -j${JOBS}
-
-install: build
-	$(MAKE) -C ${BUILD_DIR} install
+	make
 
 clean:
-	rm -rf ${BUILD_DIR} Botan-${BOTAN_VERSION}
+	rm -rf ${BOTAN}
