@@ -15,13 +15,13 @@ git clone --recurse-submodules https://github.com/jiep/pqc-demos.git
 
 ## Demos
 
-## LibOQS
+### LibOQS
 
 This demo implements the following key-exchange protocol with [`liboqs`](https://github.com/open-quantum-safe/liboqs).
 
 See [demo-liboqs-c](./demo-liboqs-c/) for more details.
 
-## LibOQS-Python
+### LibOQS-Python
 
 This demo implements the following hybrid signature scheme with [`liboqs-python`](https://github.com/open-quantum-safe/liboqs).
 
