@@ -5,3 +5,7 @@
 [submodule "liboqs-python"]
 	path = liboqs-python
 	url = https://github.com/open-quantum-safe/liboqs-python
+
+[submodule "botan"]
+	path = botan
+	url = https://github.com/randombit/botan

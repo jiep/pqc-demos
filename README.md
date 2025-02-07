@@ -45,6 +45,12 @@ This demo shows how to visualize if post-quantum TLS is used by browser.
 
 See [demo-tls13](./demo-tls13/) for more details.
 
+### Demo Stateful Hash-Based Signatures with Botan
+
+This demo shows how private key changes its state after each signature generation.
+
+See [demo-shbs](./demo-shbs/) for more details.
+
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
