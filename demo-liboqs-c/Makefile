@@ -16,7 +16,7 @@ demo: ../liboqs/build/lib/liboqs.a
 	$(CC) $(CFLAGS) demo-liboqs.c -o demo-liboqs $(LDFLAGS)
 
 run: demo
-	./demo-liboqs
+	./demo-liboqs $(kem)
 
 clean:
 	rm -rf ../liboqs/build demo-liboqs

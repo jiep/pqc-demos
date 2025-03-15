@@ -13,6 +13,7 @@ Algorithms names:
 #include <openssl/evp.h>
 
 #define MAX 16
+#define SHA3_256_HASH_LENGTH 32
 
 void sha3_256(uint8_t *output, const uint8_t *input, size_t input_len) {
     EVP_MD_CTX *mdctx = NULL;
@@ -70,10 +71,28 @@ void concat_keys(const uint8_t *key1, const uint8_t *key2, const uint8_t *key3,
   memcpy(out + 2*length, key3, length);
 }
 
-int main(void) {
+int main(int argc, char** argv) {
 
-  OQS_KEM *kem = OQS_KEM_new(OQS_KEM_alg_ml_kem_1024);
-  printf("[--] Selected KEM: ML-KEM-1024\n");
+  if(argc < 2){
+    printf("You must provide a valid KEM!\n");
+    return 1;
+  }
+
+  char* KEM = argv[1];
+
+  if(!OQS_KEM_alg_is_enabled(KEM)) {
+    printf("%s is not enabled or does not exist!\n", KEM);
+    printf("Available KEM are: \n");
+    for (int i = 0; i < OQS_KEM_alg_count(); i++) {
+      if(OQS_KEM_alg_is_enabled(OQS_KEM_alg_identifier(i)))
+        printf("%s\n", OQS_KEM_alg_identifier(i));
+    }
+    return 1;
+  }
+
+  OQS_KEM *kem = OQS_KEM_new(KEM);
+  if(kem == NULL) exit(EXIT_FAILURE);
+  printf("[--] Selected KEM: %s\n", KEM);
 
   // Static keys for P1
   uint8_t *pk1 = malloc(kem->length_public_key);
@@ -168,23 +187,23 @@ int main(void) {
 
   // P1 generates a secret key from k_prime, k1_prime, and k2
   uint8_t *concat_keys1 = malloc(3*kem->length_shared_secret);
-  uint8_t *key1 = malloc(kem->length_shared_secret);
+  uint8_t *key1 = malloc(SHA3_256_HASH_LENGTH);
   concat_keys(k_prime, k1_prime, k2, kem->length_shared_secret, concat_keys1);
   sha3_256(key1, concat_keys1, 3*kem->length_shared_secret);
 
   // P2 generates a secret key from k, k1, and k2_prime
   uint8_t *concat_keys2 = malloc(3*kem->length_shared_secret);
-  uint8_t *key2 = malloc(kem->length_shared_secret);
+  uint8_t *key2 = malloc(SHA3_256_HASH_LENGTH);
   concat_keys(k, k1, k2_prime, kem->length_shared_secret, concat_keys2);
   sha3_256(key2, concat_keys2, 3*kem->length_shared_secret);
 
   printf("\n[P1] shared key: ");
-  print_hex(key1, kem->length_shared_secret);
+  print_hex(key1, SHA3_256_HASH_LENGTH);
 
   printf("[P2] shared key: ");
-  print_hex(key2, kem->length_shared_secret);
+  print_hex(key2, SHA3_256_HASH_LENGTH);
 
-  if(memcmp(key1, key2, kem->length_shared_secret) != 0){
+  if(memcmp(key1, key2, SHA3_256_HASH_LENGTH) != 0){
     printf("[--] Key exchange error!\n");
     return OQS_ERROR;
   }

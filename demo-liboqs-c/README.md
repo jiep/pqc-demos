@@ -18,10 +18,10 @@ make liboqs
 make demo
 ```
 
-3. Run `demo-liboqs`.
+3. Run `demo-liboqs` with `ML-KEM-1024`.
 
 ```bash
-make run
+make run kem=ML-KEM-1024
 ```
 <details>
 <summary>View example (click to expand)</summary>
@@ -62,6 +62,55 @@ make run
 
 [P1] shared key: ceafc8c0b82344e1fc203ab956862fc090e56e178b1b987dab4213fa3d0d9eab
 [P2] shared key: ceafc8c0b82344e1fc203ab956862fc090e56e178b1b987dab4213fa3d0d9eab
+[--] Key exchange successful!
+```    
+</details>
+
+3. Run `demo-liboqs` with `HQC-256`.
+
+```bash
+make run kem=HQC-256
+```
+
+<details>
+<summary>View example (click to expand)</summary>
+
+```
+[--] Selected KEM: HQC-256
+
+[P1] Generating static keys...
+[P1] pk1 (7245 bytes): fca425790417bfede58901dac2e32113...bc02e31770aff70407fa65ebb6331507
+[P1] sk1 (7317 bytes): 7994d90d04cc96f01654915a680c7479...bc02e31770aff70407fa65ebb6331507
+
+[P2] Generating static keys...
+[P2] pk2 (7245 bytes): e9196ee6b438edb0c61c181ca6e8f822...e37364af32bff2cb1eabd892d7c25d06
+[P2] sk2 (7317 bytes): 1d465976853158b629e0b6f09cf370d8...e37364af32bff2cb1eabd892d7c25d06
+
+[P1] Generating ephemeral pk and sk...
+[P1] pk (7245 bytes): dd0e539dd33327aa2090f6d4416a66c2...5fc57fb11be632aad963f9ac1aa84a15
+[P1] sk (7317 bytes): be1ce8bcaab20fc01d777db4b537b6ab...5fc57fb11be632aad963f9ac1aa84a15
+[P1] Generating encapsulation...
+[P1] c2 (14421 bytes): b9b35bcc2fe233c588535d087b2d151d...4ab430f486f050aedb68c9fdf61aab2d
+[P1] k2 (64 bytes): 326dc74aea1b1db052464d864379568b785bac0d6bbc3ece020a35255a870bece89e3c409e7de5af704d2fba6442305f500fdc0825258de15534c7e3a56a371f
+[P1] Sending pk and c2 to P2...
+
+[P2] Generating encapsulation...
+[P2] c (14421 bytes): aa6229996e333558cf9ee632da445b17...3bb069595f9198f51c3439fc9ffb0b83
+[P2] k (64 bytes): feefe84ebf441ae296f672697aa6089f9c59bdff8e609283bc5b7b429f557f60130de7b92ee8087acdb5670d34f86f28204e104e59064127e4a10628f703b137
+[P2] Generating encapsulation...
+[P2] c1 (14421 bytes): 64c2b7ad5dcd7d6cd76023ee57144162...cfae94b12fb793f17a82c37e9255cc3f
+[P2] k1 (64 bytes): 7ad653a4313bd84d79c46fe57cc26563bddcbfb24a2ddc91a7ed9043efab6efb820181cbf6b66e94f55ef0b0d1a83e7f8f2a3efdb82e649911ab3ed7607768af
+[P2] Generating decapsulation...
+[P2] k2_prime (64 bytes): 326dc74aea1b1db052464d864379568b785bac0d6bbc3ece020a35255a870bece89e3c409e7de5af704d2fba6442305f500fdc0825258de15534c7e3a56a371f
+[P2] Sending c and c1 to P1...
+
+[P1] Generating decapsulation...
+[P1] k_prime (64 bytes): feefe84ebf441ae296f672697aa6089f9c59bdff8e609283bc5b7b429f557f60130de7b92ee8087acdb5670d34f86f28204e104e59064127e4a10628f703b137
+[P1] Generating decapsulation...
+[P1] k1_prime (64 bytes): 7ad653a4313bd84d79c46fe57cc26563bddcbfb24a2ddc91a7ed9043efab6efb820181cbf6b66e94f55ef0b0d1a83e7f8f2a3efdb82e649911ab3ed7607768af
+
+[P1] shared key: b35b3ab4cb28093be4a5b4ad9ecb3164947765a2c8bff9988a0d704239de86c1
+[P2] shared key: b35b3ab4cb28093be4a5b4ad9ecb3164947765a2c8bff9988a0d704239de86c1
 [--] Key exchange successful!
 ```    
 </details>
