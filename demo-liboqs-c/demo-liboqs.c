@@ -221,9 +221,9 @@ int main(int argc, char** argv) {
   OQS_MEM_secure_free(k_prime, kem->length_shared_secret);
   OQS_MEM_secure_free(k1_prime, kem->length_shared_secret);
   OQS_MEM_secure_free(concat_keys1, 3*kem->length_shared_secret);
-  OQS_MEM_secure_free(key1, kem->length_shared_secret);
+  OQS_MEM_secure_free(key1, SHA3_256_HASH_LENGTH);
   OQS_MEM_secure_free(concat_keys2, 3*kem->length_shared_secret);
-  OQS_MEM_secure_free(key2, kem->length_shared_secret);
+  OQS_MEM_secure_free(key2, SHA3_256_HASH_LENGTH);
 
   // Public variables are freed 
   OQS_MEM_insecure_free(pk1);
